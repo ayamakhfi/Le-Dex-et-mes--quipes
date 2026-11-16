@@ -5,9 +5,25 @@
   "private": true,
   "scripts": {
     "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "api": "json-server --watch db.json --port 3000"
+
   },
   "devDependencies": {
+    "json-server": "^0.17.4",
     "tailwindcss": "3.4.19"
-  }
+  },
+  "main": "data.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayamakhfi/Le-Dex-et-mes--quipes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ayamakhfi/Le-Dex-et-mes--quipes/issues"
+  },
+  "homepage": "https://github.com/ayamakhfi/Le-Dex-et-mes--quipes#readme"
 }
