@@ -1,4 +1,4 @@
-import { getcreature , typeliste} from "./api.js";
+import { getcreature , recherchecreature, typeliste } from "./api.js";
 import { affichercréature , affichermessage, hiddmessage } from "./ui.js";
 
 async function show(){
@@ -36,3 +36,16 @@ finally{
 });
    });
  }filtre();
+
+
+ function recherche(){
+    const rech=document.getElementById("search");
+     
+     rech.addEventListener("input",async()=>{
+       const text=rech.value.toLowerCase();
+       recherchecreature(text);
+       const trouver=await recherchecreature(text);
+       affichercréature(trouver);
+     });
+ }
+ recherche();
