@@ -26,15 +26,35 @@ export async function typeliste(catégorie){
 
 
 // ---------------------------------recherche----------------------
-export async function recherchecreature(text){
+export async function recherchecreature(catégorie,text){
   try{
-     const responce=await fetch(`http://localhost:3000/creatures?q=${text}`)
+     const responce=await fetch(`http://localhost:3000/creatures?type=${catégorie}&q=${text}`)
+     if(catégorie!=="tous"){
     if(!responce.ok){
         throw new Error(`HTTP.error={response status}`)
     }
       const data=await responce.json();
       return data;
-  }
+  }}
   catch(error){console.error(error.message)};
+
 }
+
+// export async function recherchecreature(text){
+//   try{
+//      const responce=await fetch(`http://localhost:3000/creatures?q=${text}`)
+//     if(!responce.ok){
+//         throw new Error(`HTTP.error={response status}`)
+//     }
+//       const data=await responce.json();
+//       return data;
+//   }
+//   catch(error){console.error(error.message)};
+// }
+
+
+
+
+
+
 

@@ -1,12 +1,12 @@
 import { getcreature , recherchecreature, typeliste } from "./api.js";
-import { affichercréature , affichermessage, hiddmessage } from "./ui.js";
+import { affichercarte , affichermessage, hiddmessage ,debouce} from "./ui.js";
 
 async function show(){
     affichermessage();
     try{
 const elements=await getcreature();
  console.log(elements)
-affichercréature(elements);}
+affichercarte(elements);}
 catch(error){console.error(error);
 
 }
@@ -25,27 +25,49 @@ finally{
   
    const filt=document.getElementById("filters");
    const buttons=filt.querySelectorAll(".chip");
-  
+    
    buttons.forEach(button=>{
       button.addEventListener("click",async()=>{
          const filtertype=button.textContent.trim();
+         if(filtertype==="Tous"){
+         show(); return;
+         }
        typeliste(filtertype);
            const choisi= await typeliste(filtertype);
        console.log(choisi);
-     affichercréature(choisi);
+     affichercarte(choisi);
 });
    });
  }filtre();
 
 
- function recherche(){
-    const rech=document.getElementById("search");
-     
-     rech.addEventListener("input",async()=>{
-       const text=rech.value.toLowerCase();
-       recherchecreature(text);
-       const trouver=await recherchecreature(text);
-       affichercréature(trouver);
-     });
- }
- recherche();
+ async function recherche(text){
+    const filt=document.getElementById("filters");
+   const buttons=filt.querySelectorAll(".chip");
+  
+    
+
+      buttons.forEach(button=>{
+      button.addEventListener("click", async()=>{
+         const filtertype=button.textContent.trim();
+          console.log("f",filtertype);
+
+      const trouver=await recherchecreature(filtertype,text);
+      console.log(trouver);
+       affichercarte(trouver);
+          
+});
+           });
+
+}
+
+
+
+//  ------------------------callfunction----------------
+const delaysearch=debouce(recherche,500);
+
+const input=document.getElementById("search");
+input.addEventListener('input', ()=>{
+  const text=input.value.toLowerCase();
+  delaysearch(text);
+});
