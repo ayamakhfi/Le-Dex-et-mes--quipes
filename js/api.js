@@ -15,11 +15,46 @@ export async function typeliste(catégorie){
     const response= await fetch(`http://localhost:3000/creatures?type=${catégorie}`);
     
     if(!response.ok){
-        throw new Error(`Http.error={response status} `)
+        throw new Error(`HTTP.error={response status} `)
     }
 
     const data=await response.json();
       return data  }
   catch(error){console.error(error.message);}
-  
+
 }
+
+
+// ---------------------------------recherche----------------------
+export async function recherchecreature(catégorie,text){
+  try{
+     const responce=await fetch(`http://localhost:3000/creatures?type=${catégorie}&q=${text}`)
+     if(catégorie!=="tous"){
+    if(!responce.ok){
+        throw new Error(`HTTP.error={response status}`)
+    }
+      const data=await responce.json();
+      return data;
+  }}
+  catch(error){console.error(error.message)};
+
+}
+
+// export async function recherchecreature(text){
+//   try{
+//      const responce=await fetch(`http://localhost:3000/creatures?q=${text}`)
+//     if(!responce.ok){
+//         throw new Error(`HTTP.error={response status}`)
+//     }
+//       const data=await responce.json();
+//       return data;
+//   }
+//   catch(error){console.error(error.message)};
+// }
+
+
+
+
+
+
+
