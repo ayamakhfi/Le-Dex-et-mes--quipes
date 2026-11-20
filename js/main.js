@@ -72,6 +72,11 @@ input.addEventListener('input', ()=>{
 async function selecttype(){
   const boutton=gardetype();
    console.log(boutton);
+
+   if(boutton==="Tous"){
+    const liste=await getcreature();
+    affichercarte(liste); return;
+   }
   const choix=await typeliste(boutton);
   affichercarte(choix);
 }
