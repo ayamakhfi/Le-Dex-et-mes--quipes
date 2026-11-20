@@ -1,7 +1,7 @@
-export function settype(){
-    localStorage.setItem((type),JSON.stringify());
+export function settype(filter){
+    localStorage.setItem("type",JSON.stringify(filter));
 }
 
 export function gardetype(){
-    JSON.parse(localStorage.getItem(settype))
+    return JSON.parse(localStorage.getItem("type"));
 }
