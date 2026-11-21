@@ -53,7 +53,7 @@
 function panneaudétail(créature){
 
    document. getElementById("detail").classList.remove("hidden");
-   document.getElementById("détail-id").textContent=`${créature.id}.Détail`;
+   document.getElementById("détail-id").textContent=`${créature.numero}.Détail`;
    document.getElementById("détail-img").src=créature.image;
    document.getElementById("détail-img").alt=créature.name;
    document.getElementById("détail-name").textContent=créature.name;
