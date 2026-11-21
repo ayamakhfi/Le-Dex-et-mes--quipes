@@ -1,3 +1,6 @@
+
+
+
 export async function getcreature(catégorie, text ,tri ,order){
     try{
       let url="http://localhost:3000/creatures";
@@ -26,6 +29,7 @@ export async function getcreature(catégorie, text ,tri ,order){
         if(!response.ok){
         throw new Error(`HTTP.error:{response status}`);}
          const data=await response.json();
+
          console.log("donné",data);
         return data;
     }
@@ -34,7 +38,27 @@ export async function getcreature(catégorie, text ,tri ,order){
 
 
 
+// -----------------------------add creature------------------
+export async function addcreature(nouvellecréature){
+  try{
+    const responce=await fetch("http://localhost:3000/creatures",{
+        method: "POST" ,
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(nouvellecréature)
+    });
 
+    if(!responce.ok){
+      throw new Error(`Erreur lors de l'ajouter`)
+    }
+
+    const data=await responce.json();
+    return data;
+
+  }
+  catch(error){
+    console.error(error);
+  }
+}
 
 
 
