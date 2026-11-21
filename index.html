@@ -33,14 +33,27 @@
 
 
 
+     
      <section aria-label="Recherche et filtres" class="flex flex-col gap-4">
+      <div class="flex flex-row">
       <div class="flex flex-wrap items-end justify-between gap-4">
+        
         <h1 class="font-display text-4xl font-extrabold">Trouver une créature</h1>
+       
         <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
+        
           Rechercher par nom
           <input id="search" type="search" placeholder="ex. Mossling" class="field font-normal focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-black">
         </label>
       </div>
+       <select  id="sort" class="h-12 w-48 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm text-gray-700">
+             <option value="">trier par</option>
+            <option value="name-asc">nom A → Z</option>
+            <option value="name-desc">nom Z → A</option>
+            <option value="numero-asc"> numéro</option>
+
+          </select></div>
+          
       <div id="filters" role="group" aria-label="Filtrer par type" class="flex h-11 flex-nowrap gap-2 overflow-x-auto ">
           <button  type="button" class="chip bg-ink text-white border-ink shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-black">Tous</button>
           <button  type="button" class="chip shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-black">Feu</button>
