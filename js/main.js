@@ -1,11 +1,17 @@
-import { getcreature , recherchecreature, typeliste } from "./api.js";
+import { getcreature  } from "./api.js";
 import { affichercarte , affichermessage, hiddmessage ,debouce} from "./ui.js";
 import {settype, gardetype} from"./storage.js";
+
+
+
+let typecreature="Tous";
+let recherchecreature=" ";
+
 
 async function show(){
     affichermessage();
     try{
-const elements=await getcreature();
+const elements=await getcreature(typecreature, recherchecreature);
  console.log(elements)
 affichercarte(elements);}
 catch(error){console.error(error);
@@ -30,17 +36,11 @@ finally{
    buttons.forEach(button=>{
       button.addEventListener("click",async()=>{
          const filtertype=button.textContent.trim();
-         settype(filtertype);
-         if(filtertype==="Tous"){
-         const liste=await getcreature();
-         affichercarte(liste);
-         ; return;
-         }
-
-           const choisi= await typeliste(filtertype);
-           
-       
-     affichercarte(choisi);
+          typecreature=filtertype;
+             settype(filtertype);
+            const data=await getcreature(typecreature, recherchecreature);
+            console.log(data);
+           affichercarte(data);
 });
    });
  }filtre();
@@ -49,9 +49,9 @@ finally{
 //  -----------------recherche-----------------
  async function recherche(text){
   
-
-      const trouver=await recherchecreature(text);
-      console.log(trouver);
+         recherchecreature=text;
+      const trouver=await getcreature(typecreature, recherchecreature);
+    
        affichercarte(trouver);
 
 
@@ -72,13 +72,12 @@ input.addEventListener('input', ()=>{
 async function selecttype(){
   const boutton=gardetype();
    console.log(boutton);
-
-   if(boutton==="Tous"){
-    const liste=await getcreature();
-    affichercarte(liste); return;
-   }
-  const choix=await typeliste(boutton);
+  const choix=await getcreature(boutton,recherchecreature);
   affichercarte(choix);
 }
 
 selecttype();
+
+
+//-----------------trier------------------------
+
