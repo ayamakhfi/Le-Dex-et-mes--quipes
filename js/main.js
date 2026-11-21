@@ -1,6 +1,6 @@
 import { addcreature, getcreature } from "./api.js";
 import { affichercarte , affichermessage, hiddmessage ,debouce} from "./ui.js";
-import {settype, gardetype} from"./storage.js";
+import {settype, gardetype ,setformule,brouillons ,removebrouillon} from"./storage.js";
 import { nouvellecréature } from "./rules.js";
 
 let typecreature="Tous";
@@ -118,48 +118,96 @@ nouvellecréature(data);
 }
 rechercheID();
 
+
+
+// ------------------------------formulaire----------------------
+
 const form=document.getElementById("creature-form");
 // --------------------------addcreature---------------
-const numero=form.querySelector('[name="id"]').value;
-const name=form.querySelector('[name="name"]').value;
-const type=form.querySelector('[name="type"]').value;
-const level=form.querySelector('[name="level"]').value;
-const hp=form.querySelector('[name="stat1"]').value;
- const attck=form.querySelector('[name="stat2"]').value;
- const defence=form.querySelector('[name="stat3"]').value;
- const image=form.querySelector('[name="image"]').value;
- const description=form.querySelector('[name="description"]').value
+const numero=form.querySelector('[name="id"]');
+const name=form.querySelector('[name="name"]');
+const type=form.querySelector('[name="type"]');
+const level=form.querySelector('[name="level"]');
+const hp=form.querySelector('[name="stat1"]');
+ const attack=form.querySelector('[name="stat2"]');
+ const defence=form.querySelector('[name="stat3"]');
+ const image=form.querySelector('[name="image"]');
+ const description=form.querySelector('[name="description"]');
+
+ const rest=brouillons();
+ console.log(rest);
+  if(rest){
+    numero.value=rest.numero;
+    name.value=rest.name;
+    type.value=rest.type;
+    level.value=rest.level;
+    hp.value=rest.hp;
+    attack.value=rest.attack;
+    defence.value=rest.defence;
+    image.value=rest.image;
+    description.value=rest.description;
+  }
+
+// --------------------------------input--------------
+form.addEventListener('input', ()=>{
+   
+    const item={numero: numero.value,
+                     name: name.value,
+                     type:type.value,
+                     level:level.value,
+                     hp:hp.value,
+                     attack: attack.value,
+                     defence:defence.value,
+                     
+                     image:image.value,
+                     description:description.value};
+        setformule(item);
+
+                    });
+
+// ------------------------------submit------------------------
 
  form.addEventListener('submit',async (e)=>{
    e.preventDefault();
-   if(numero===""||name===""||level===""||hp===""||attck===""||defence===""||image===""||description==="")
+   if(numero===""||name===""||level===""||hp===""||attack===""||defence===""||image===""||description==="")
     {alert("Veuiller remplir tous les champs!");
        return;}
 
 
-    const nouvellecarte={numero:numero,
-                     name: name,
-                     type:type,
-                     level:level,
-                     stats:{hp:Number(hp)
-                        ,attack: Number(attck)
-                        ,defence:Number(defence )
+    const nouvellecarte={numero:numero.value.trim(),
+                     name: name.value,
+                     type:type.value,
+                     level:level.value,
+                     stats:{hp:Number(hp.value)
+                        ,attack: Number(attack.value)
+                        ,defence:Number(defence.value)
                      },
-                     image:image,
-                     description:description}
+                     image:image.value,
+                     description:description.value}
     
+   try{
+   const result=await addcreature(nouvellecarte);
+     if(result){
+      removebrouillon()
+      form.reset();
+      show();
+     }}
+     catch(error){
+      console.error(error)
+     }
 
-  await addcreature(nouvellecarte);
+
 
 });
 
-  
+// --------------------------------reset---------------------
   form.addEventListener("reset",(e)=>{
    const inputdelete=form.querySelectorAll("input");
    const messagedelete=form.querySelectorAll(".error-message");
    inputdelete.forEach(input=>{
    input.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");});
  
+
 
    messagedelete.forEach(message=>{
    message.classList.remove("text-red-500", "text-green-500");
