@@ -697,6 +697,10 @@ video {
   height: 1.5rem;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .w-11 {
   width: 2.75rem;
 }
@@ -711,6 +715,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-48 {
+  width: 12rem;
 }
 
 .max-w-7xl {
@@ -731,6 +739,10 @@ video {
 
 .grid-cols-\[80px_1fr_40px\] {
   grid-template-columns: 80px 1fr 40px;
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -844,6 +856,11 @@ video {
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
+}
+
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
 }
 
 .bg-\[\#C60000\] {
