@@ -1,6 +1,6 @@
 import { getcreature  } from "./api.js";
 import { affichercarte , affichermessage, hiddmessage ,debouce} from "./ui.js";
-import {settype} from"./storage.js";
+import {settype, gardetype} from"./storage.js";
 
 
 
@@ -68,7 +68,15 @@ input.addEventListener('input', ()=>{
   delaysearch(text);
 });
 
+// --------------------garde type--------------
+async function selecttype(){
+  const boutton=gardetype();
+   console.log(boutton);
+  const choix=await getcreature(boutton,recherchecreature);
+  affichercarte(choix);
+}
 
+selecttype();
 
 
 //-----------------trier------------------------
