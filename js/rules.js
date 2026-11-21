@@ -25,10 +25,10 @@ inputId.addEventListener("input", function(){
       exist=true;
 }}
 
-console.log (exist);
+
 
     if (valeur===""){
-        messageErreurId.textContent="champ obligatoir";
+        messageErreurId.textContent="";
     }
     else if(!regexId.test(valeur)){
         inputId.classList.add("border-red-500");
@@ -67,7 +67,7 @@ const regexNom=/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
    messageErreurNom.classList.remove("text-red-500","text-green-500");
 
     if(mot===""){
-        messageErreurNom.textContent="champ obligatoir";
+        messageErreurNom.textContent="";
     }
     else if (!regexNom.test(mot)){
         inputNom.classList.add("text-red-500");
@@ -130,7 +130,7 @@ const regexNom=/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
    messageErreurStatic.classList.remove("text-red-500","text-green-500");
 
      if(statique ===""){
-       messageErreurStatic.textContent="champ obligatoir";}
+       messageErreurStatic.textContent="";}
 
     else if(!regexStatic.test(statique) || statique<1 || statique>255){
         input.classList.add("border-red-500");
@@ -161,7 +161,7 @@ inputImg.addEventListener("input",function(){
    messageErreurImg.classList.remove("text-red-500","text-green-500");
 
      if(img ===""){
-       messageErreurImg.textContent="champ obligatoir";}
+       messageErreurImg.textContent="";}
 
     else if(!regexImg.test(img)){
        inputImg.classList.add("border-red-500");
@@ -188,7 +188,7 @@ inputMessage.classList.remove("border-red-500","border-green-500" ,"text-red-500
    messageErreurMessage.classList.remove("text-red-500","text-green-500");
 
    if(message===""){
-      messageErreurMessage.textContent="champ obligatoir";
+      messageErreurMessage.textContent="";
    }
 
    else if(!regexMessage.test(message)){
