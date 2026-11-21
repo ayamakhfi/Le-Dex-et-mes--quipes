@@ -1,4 +1,7 @@
-export async function getcreature(catégorie, text){
+
+
+
+export async function getcreature(catégorie, text ,tri ,order){
     try{
       let url="http://localhost:3000/creatures";
 
@@ -15,7 +18,12 @@ export async function getcreature(catégorie, text){
       url+=`?q=${text}`;}
         }
       // -------------------------filtersearch----------------
-  
+      if(tri!==""){
+        if(catégorie !=="Tous" || text !==""){
+      url+= `&_sort=${tri}&_order=${order}`;}
+        else{
+          url+=`?_sort=${tri}&_order=${order}`;}
+      }
 
         const response=await fetch(url);
         if(!response.ok){
@@ -27,6 +35,20 @@ export async function getcreature(catégorie, text){
     catch(error){console.error(error.message);}
 }
 
+
+
+// -----------------------------add creature------------------
+export async function addcreature(nouvellecréature){
+  try{
+    const responce=await fetch("http://localhost:3000/creatures",{
+        method: "POST" ,
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(nouvellecréature)
+    });
+
+    if(!responce.ok){
+      throw new Error(`Erreur lors de l'ajouter`)
+    }
 // -----------------------------filtre-----------------------
 // export async function typeliste(catégorie){
 //   try{
@@ -58,7 +80,14 @@ export async function getcreature(catégorie, text){
 
 // }
 
+    const data=await responce.json();
+    return data;
 
+  }
+  catch(error){
+    console.error(error);
+  }
+}
 
 
 
