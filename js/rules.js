@@ -8,10 +8,11 @@ const messageErreurId= inputId.parentElement.querySelector(".error-message");
 
  const regexId= /^#\d{3}$/;
 
-inputId.addEventListener("input", function(liste){
+inputId.addEventListener("input", function(){
    
 
     const valeur= inputId.value.trim();
+
 
     inputId.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
     messageErreurId.classList.remove("text-red-500","text-green-500");
@@ -19,13 +20,15 @@ inputId.addEventListener("input", function(liste){
     
 
     let exist=false;
-    for(let i=0;i<liste.length;i++){
-    if (valeur===liste[i].numero){
+    for(const creature of liste){
+    if (valeur===creature.numero){
       exist=true;
 }}
 
+console.log (exist);
+
     if (valeur===""){
-        messageErreurId.textContent="";
+        messageErreurId.textContent="champ obligatoir";
     }
     else if(!regexId.test(valeur)){
         inputId.classList.add("border-red-500");
@@ -64,7 +67,7 @@ const regexNom=/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
    messageErreurNom.classList.remove("text-red-500","text-green-500");
 
     if(mot===""){
-        messageErreurNom.textContent="";
+        messageErreurNom.textContent="champ obligatoir";
     }
     else if (!regexNom.test(mot)){
         inputNom.classList.add("text-red-500");
@@ -127,7 +130,7 @@ const regexNom=/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
    messageErreurStatic.classList.remove("text-red-500","text-green-500");
 
      if(statique ===""){
-       messageErreurStatic.textContent="";}
+       messageErreurStatic.textContent="champ obligatoir";}
 
     else if(!regexStatic.test(statique) || statique<1 || statique>255){
         input.classList.add("border-red-500");
@@ -158,7 +161,7 @@ inputImg.addEventListener("input",function(){
    messageErreurImg.classList.remove("text-red-500","text-green-500");
 
      if(img ===""){
-       messageErreurImg.textContent="";}
+       messageErreurImg.textContent="champ obligatoir";}
 
     else if(!regexImg.test(img)){
        inputImg.classList.add("border-red-500");
@@ -185,7 +188,7 @@ inputMessage.classList.remove("border-red-500","border-green-500" ,"text-red-500
    messageErreurMessage.classList.remove("text-red-500","text-green-500");
 
    if(message===""){
-      messageErreurMessage.textContent="";
+      messageErreurMessage.textContent="champ obligatoir";
    }
 
    else if(!regexMessage.test(message)){
