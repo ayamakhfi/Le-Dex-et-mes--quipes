@@ -1,521 +1,521 @@
-// =============================================================
-// script.js — Mon Dex
+// // =============================================================
+// // script.js — Mon Dex
 
-// -------------------------------------------------------------
-// 1. AFFICHAGE
-// Supprimez les cartes écrites à la main dans index.html et
-// construisez la grille à partir du tableau `creatures`.
-// -------------------------------------------------------------
+// // -------------------------------------------------------------
+// // 1. AFFICHAGE
+// // Supprimez les cartes écrites à la main dans index.html et
+// // construisez la grille à partir du tableau `creatures`.
+// // -------------------------------------------------------------
 
-const grid=document.getElementById("grid");
- function affichercartes(liste){
-   grid.innerHTML="";
+// const grid=document.getElementById("grid");
+//  function affichercartes(liste){
+//    grid.innerHTML="";
 
-   const headercount=document.getElementById("creature-count");
-   headercount.textContent=`${créatures.length}`;
+//    const headercount=document.getElementById("creature-count");
+//    headercount.textContent=`${créatures.length}`;
 
 
 
-   liste.forEach((créature)=>{
-      const totale= créature.stats.hp+créature.stats.attack+créature.stats.defence;
+//    liste.forEach((créature)=>{
+//       const totale= créature.stats.hp+créature.stats.attack+créature.stats.defence;
 
-      const carte= document.createElement("article");
-      carte.className='flex flex-col gap-3 rounded-card bg-white p-3 pb-4  hover:-translate-y-3 transition-transform duration-300 hover:shadow-lg hover:shadow-yellow-300';
+//       const carte= document.createElement("article");
+//       carte.className='flex flex-col gap-3 rounded-card bg-white p-3 pb-4  hover:-translate-y-3 transition-transform duration-300 hover:shadow-lg hover:shadow-yellow-300';
 
-      carte.innerHTML=` <div class="relative flex h-36 items-center justify-center rounded-xl bg-brand-light">
-                          <span class="absolute left-3 top-2 font-mono text-sm text-muted">${créature.id}</span>
-                         <img src="${créature.image}"  alt="${créature.name}"> 
-          </div>
+//       carte.innerHTML=` <div class="relative flex h-36 items-center justify-center rounded-xl bg-brand-light">
+//                           <span class="absolute left-3 top-2 font-mono text-sm text-muted">${créature.id}</span>
+//                          <img src="${créature.image}"  alt="${créature.name}"> 
+//           </div>
 
-                       <div class="flex items-center justify-between gap-2">
-                       <h3 class="font-display text-xl font-semibold">${créature.name}</h3>
-                        <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">${créature.type}</span>
-          </div>
-                     <p class="text-sm text-muted">${créature.level} · Total ${totale}</p>
+//                        <div class="flex items-center justify-between gap-2">
+//                        <h3 class="font-display text-xl font-semibold">${créature.name}</h3>
+//                         <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">${créature.type}</span>
+//           </div>
+//                      <p class="text-sm text-muted">${créature.level} · Total ${totale}</p>
          
-                      <button type="button" data-action="ajouter" data-id="${créature.id}" class="btn-outline border-[#C60000] text-[#C60000] 
-          focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-black">Ajouter à l'équipe</button>`;
+//                       <button type="button" data-action="ajouter" data-id="${créature.id}" class="btn-outline border-[#C60000] text-[#C60000] 
+//           focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-black">Ajouter à l'équipe</button>`;
 
-          carte.addEventListener("click",()=>{
-            panneaudétail(créature);
-          });
-           grid.appendChild(carte);
-      });
-   }
+//           carte.addEventListener("click",()=>{
+//             panneaudétail(créature);
+//           });
+//            grid.appendChild(carte);
+//       });
+//    }
 
-   affichercartes(créatures);
+//    affichercartes(créatures);
  
 
 
-// -------------------------------------------------------------
-// 2. DÉTAIL
-// Un clic sur une carte ouvre le panneau de détail :
-// image, description, et statistiques affichées en barres.
-// -------------------------------------------------------------
+// // -------------------------------------------------------------
+// // 2. DÉTAIL
+// // Un clic sur une carte ouvre le panneau de détail :
+// // image, description, et statistiques affichées en barres.
+// // -------------------------------------------------------------
 
-function panneaudétail(créature){
+// function panneaudétail(créature){
 
-   document. getElementById("detail").classList.remove("hidden");
-   document.getElementById("détail-id").textContent=`${créature.id}.Détail`;
-   document.getElementById("détail-img").src=créature.image;
-   document.getElementById("détail-img").alt=créature.name;
-   document.getElementById("détail-name").textContent=créature.name;
-   document.getElementById("détail-type").textContent=créature.type;
-   document.getElementById("détail-descreption").textContent=créature.description;
+//    document. getElementById("detail").classList.remove("hidden");
+//    document.getElementById("détail-id").textContent=`${créature.id}.Détail`;
+//    document.getElementById("détail-img").src=créature.image;
+//    document.getElementById("détail-img").alt=créature.name;
+//    document.getElementById("détail-name").textContent=créature.name;
+//    document.getElementById("détail-type").textContent=créature.type;
+//    document.getElementById("détail-descreption").textContent=créature.description;
 
-   const stats=[
-      { nom:"hp", valeur:créature.stats.hp},
-      {nom:"attack",valeur:créature.stats.attack},
-      {nom:"defence", valeur:créature.stats.defence}
-   ];
+//    const stats=[
+//       { nom:"hp", valeur:créature.stats.hp},
+//       {nom:"attack",valeur:créature.stats.attack},
+//       {nom:"defence", valeur:créature.stats.defence}
+//    ];
 
-   stats.forEach((stat)=>{
-      document.getElementById(`détail-${stat.nom}`).textContent=stat.valeur;
+//    stats.forEach((stat)=>{
+//       document.getElementById(`détail-${stat.nom}`).textContent=stat.valeur;
 
-      document.getElementById(`level-${stat.nom}`).style.width=`${Math.min(stat.valeur,100)}%`;
-   });
-    const detail=document.getElementById("detail");
-   const fermer=document.getElementById("Fermer");
-   fermer.addEventListener("click",()=>{
-     detail.classList.add("hidden");
-    });
-   
-
-   }
-
-   
-
-
-
-
-
-// -------------------------------------------------------------
-// 3. RECHERCHE
-// La liste se met à jour pendant la saisie d'un nom
-// (sans tenir compte des majuscules).
-// -------------------------------------------------------------
-
-//  function recherchecréature(){
-  
-//    const recherche=document.getElementById("search");
-//    recherche.addEventListener("input",()=>{
-//       const text=recherche.value.toLowerCase();
-//       const Result=créatures.filter((créature)=> créature.name.toLocaleLowerCase().includes(text))
-     
-//       affichercartes(Result);
+//       document.getElementById(`level-${stat.nom}`).style.width=`${Math.min(stat.valeur,100)}%`;
 //    });
-//  }
-//  recherchecréature();
-
-// -------------------------------------------------------------
-// 4. FILTRE
-// Les boutons de type n'affichent que les créatures de ce type ;
-// « Tous » réinitialise le filtre.
-// La recherche et le filtre fonctionnent ENSEMBLE.
-// -------------------------------------------------------------
-
-//  function filtre(créatures){
-// const filter=document.getElementById("filters")
-// const buttons= filter.querySelectorAll(".chip");
-// buttons.forEach(button=>{
-
-// button.addEventListener("click",()=>{
-   
-//      const result=[];
-//      const filtretype= button.textContent;
-   
-//    for(let i=0;i<créatures.length;i++){
-
-//         if( filtretype===créatures[i].type){
-//          result.push(créatures[i]);
-//       }} 
-
-//       if(filtretype==="Tous"){
-//        console.log(affichercartes(créatures));}
-//       else{console.log(affichercartes(result));}
-
+//     const detail=document.getElementById("detail");
+//    const fermer=document.getElementById("Fermer");
+//    fermer.addEventListener("click",()=>{
+//      detail.classList.add("hidden");
 //     });
+   
+
+//    }
+
+   
+
+
+
+
+
+// // -------------------------------------------------------------
+// // 3. RECHERCHE
+// // La liste se met à jour pendant la saisie d'un nom
+// // (sans tenir compte des majuscules).
+// // -------------------------------------------------------------
+
+// //  function recherchecréature(){
+  
+// //    const recherche=document.getElementById("search");
+// //    recherche.addEventListener("input",()=>{
+// //       const text=recherche.value.toLowerCase();
+// //       const Result=créatures.filter((créature)=> créature.name.toLocaleLowerCase().includes(text))
+     
+// //       affichercartes(Result);
+// //    });
+// //  }
+// //  recherchecréature();
+
+// // -------------------------------------------------------------
+// // 4. FILTRE
+// // Les boutons de type n'affichent que les créatures de ce type ;
+// // « Tous » réinitialise le filtre.
+// // La recherche et le filtre fonctionnent ENSEMBLE.
+// // -------------------------------------------------------------
+
+// //  function filtre(créatures){
+// // const filter=document.getElementById("filters")
+// // const buttons= filter.querySelectorAll(".chip");
+// // buttons.forEach(button=>{
+
+// // button.addEventListener("click",()=>{
+   
+// //      const result=[];
+// //      const filtretype= button.textContent;
+   
+// //    for(let i=0;i<créatures.length;i++){
+
+// //         if( filtretype===créatures[i].type){
+// //          result.push(créatures[i]);
+// //       }} 
+
+// //       if(filtretype==="Tous"){
+// //        console.log(affichercartes(créatures));}
+// //       else{console.log(affichercartes(result));}
+
+// //     });
+// // });
+// // }
+   
+// //  filtre(créatures);
+
+
+
+//  function recherchefiltre(){
+//    const rech=document.getElementById("search");
+//    const filt=document.getElementById("filters");
+//    const buttons=filt.querySelectorAll(".chip");
+//     let filtertype="Tous";
+//       function searchtype(){
+//      const text=rech.value.toLowerCase();
+     
+//       const Result=créatures.filter((créature)=> créature.name.toLocaleLowerCase().includes(text)&& (filtertype==="Tous"||créature.type===filtertype));
+//        affichercartes(Result);}
+
+//    rech.addEventListener("input", searchtype);
+
+//    buttons.forEach(button=>{
+//       button.addEventListener("click",()=>{
+//           filtertype=button.textContent.trim();
+//        searchtype();
 // });
-// }
-   
-//  filtre(créatures);
+//    });
+//  }recherchefiltre();
 
 
 
- function recherchefiltre(){
-   const rech=document.getElementById("search");
-   const filt=document.getElementById("filters");
-   const buttons=filt.querySelectorAll(".chip");
-    let filtertype="Tous";
-      function searchtype(){
-     const text=rech.value.toLowerCase();
-     
-      const Result=créatures.filter((créature)=> créature.name.toLocaleLowerCase().includes(text)&& (filtertype==="Tous"||créature.type===filtertype));
-       affichercartes(Result);}
+// // -------------------------------------------------------------
+// // 6. MON ÉQUIPE
+// // Boutons « Ajouter à l'équipe » et « Retirer », gérés avec UN SEUL
+// // écouteur sur la grille et UN SEUL sur l'équipe (délégation).
+// // -------------------------------------------------------------
 
-   rech.addEventListener("input", searchtype);
-
-   buttons.forEach(button=>{
-      button.addEventListener("click",()=>{
-          filtertype=button.textContent.trim();
-       searchtype();
-});
-   });
- }recherchefiltre();
+// const team=document.getElementById("team");
+// const groupe=document.getElementById("groupe");
+// const count=document.getElementById("mon-équipe");
+//   let groupecartes=[];
 
 
-
-// -------------------------------------------------------------
-// 6. MON ÉQUIPE
-// Boutons « Ajouter à l'équipe » et « Retirer », gérés avec UN SEUL
-// écouteur sur la grille et UN SEUL sur l'équipe (délégation).
-// -------------------------------------------------------------
-
-const team=document.getElementById("team");
-const groupe=document.getElementById("groupe");
-const count=document.getElementById("mon-équipe");
-  let groupecartes=[];
-
-
-  function équipe(){
+//   function équipe(){
   
-     groupe.innerHTML="";
-     for(let i=0;i<6;i++){
+//      groupe.innerHTML="";
+//      for(let i=0;i<6;i++){
        
-      const carte=document.createElement("article");
-      count.textContent=`${groupecartes.length}/6`;
-      const teamcount=document.getElementById("team-count");
-        teamcount.textContent=`${groupecartes.length}`;
+//       const carte=document.createElement("article");
+//       count.textContent=`${groupecartes.length}/6`;
+//       const teamcount=document.getElementById("team-count");
+//         teamcount.textContent=`${groupecartes.length}`;
 
 
 
-          const buttons=document.querySelectorAll(`[data-action="ajouter"]`);
-             buttons.forEach((button)=>{
-               if(groupecartes.length===6){
-             button.classList.add("bg-[#E5E7EB]","text-[#D5D9E1]");
-                button.disabled=true}
+//           const buttons=document.querySelectorAll(`[data-action="ajouter"]`);
+//              buttons.forEach((button)=>{
+//                if(groupecartes.length===6){
+//              button.classList.add("bg-[#E5E7EB]","text-[#D5D9E1]");
+//                 button.disabled=true}
 
-                else {button.classList.remove("bg-[#E5E7EB]","text-[#D5D9E1]");
-                button.disabled=false;}
-          });
+//                 else {button.classList.remove("bg-[#E5E7EB]","text-[#D5D9E1]");
+//                 button.disabled=false;}
+//           });
 
-      carte.className="flex flex-col gap-3 rounded-card bg-white p-3 pb-4  ";
+//       carte.className="flex flex-col gap-3 rounded-card bg-white p-3 pb-4  ";
 
-        if(groupecartes[i]){
-         const créature=groupecartes[i];
-         const totale=créature.stats.hp+ créature.stats.attack+ créature.stats.defence;
+//         if(groupecartes[i]){
+//          const créature=groupecartes[i];
+//          const totale=créature.stats.hp+ créature.stats.attack+ créature.stats.defence;
 
-          carte.classList.add("bg-white","border","gap-2");
-          carte.innerHTML=` <div class="relative flex h-36 items-center justify-center rounded-xl bg-brand-light">
-                      <span class="absolute left-3 top-2 font-mono text-sm text-muted">${créature.id}</span>
-                      <img src="${créature.image}"  alt="${créature.name}"> 
-                </div>
+//           carte.classList.add("bg-white","border","gap-2");
+//           carte.innerHTML=` <div class="relative flex h-36 items-center justify-center rounded-xl bg-brand-light">
+//                       <span class="absolute left-3 top-2 font-mono text-sm text-muted">${créature.id}</span>
+//                       <img src="${créature.image}"  alt="${créature.name}"> 
+//                 </div>
 
-                       <div class="flex items-center justify-between gap-2">
-                      <h3 class="font-display text-xl font-semibold">${créature.name}</h3>
-                       <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">${créature.type}</span>
-                </div>
-                        <p class="text-sm text-muted">${créature.level} · Total ${totale}</p>
+//                        <div class="flex items-center justify-between gap-2">
+//                       <h3 class="font-display text-xl font-semibold">${créature.name}</h3>
+//                        <span class="rounded-full bg-brand-light px-3 py-1 text-sm font-bold text-ink">${créature.type}</span>
+//                 </div>
+//                         <p class="text-sm text-muted">${créature.level} · Total ${totale}</p>
          
-                           <button data-action="retirer" data-id="${créature.id}" type="button" class="btn-outline border-[#C60000] text-[#C60000] 
-          focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-black">Retirer de l'équipe</button>`;
-         }
+//                            <button data-action="retirer" data-id="${créature.id}" type="button" class="btn-outline border-[#C60000] text-[#C60000] 
+//           focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-black">Retirer de l'équipe</button>`;
+//          }
 
-          groupe.appendChild(carte);}
+//           groupe.appendChild(carte);}
           
-          }
+//           }
      
 
-    grid.addEventListener("click",(e)=>{
-      const button=e.target.closest('[data-action="ajouter"]');
-      if(!button)return;
+//     grid.addEventListener("click",(e)=>{
+//       const button=e.target.closest('[data-action="ajouter"]');
+//       if(!button)return;
         
-        const id=button.dataset.id;
-        const créature=créatures.find((poké)=>poké.id===id);
+//         const id=button.dataset.id;
+//         const créature=créatures.find((poké)=>poké.id===id);
 
-        if(!créature)return;
+//         if(!créature)return;
 
-         if(groupecartes.length>=6){
-         alert("votre équipe est complét!");
-         return;
-        }
+//          if(groupecartes.length>=6){
+//          alert("votre équipe est complét!");
+//          return;
+//         }
 
-      for (let i=0;i<groupecartes.length;i++){
-         if(groupecartes[i].id===id){
-            alert("vous ne pouvez pas redoubler une carte");
-            return;
-         }}
+//       for (let i=0;i<groupecartes.length;i++){
+//          if(groupecartes[i].id===id){
+//             alert("vous ne pouvez pas redoubler une carte");
+//             return;
+//          }}
 
-         groupecartes.push(créature);
+//          groupecartes.push(créature);
          
-         équipe();
+//          équipe();
       
-    });
-      team.addEventListener("click",(e)=>{
-        const button=e.target.closest('[data-action="retirer"]');
+//     });
+//       team.addEventListener("click",(e)=>{
+//         const button=e.target.closest('[data-action="retirer"]');
 
-        if(!button)return;
+//         if(!button)return;
 
-        const id=button.dataset.id;
-           groupecartes = groupecartes.filter((poké)=>poké.id!==id)
+//         const id=button.dataset.id;
+//            groupecartes = groupecartes.filter((poké)=>poké.id!==id)
 
          
-        équipe();
+//         équipe();
 
-      });
+//       });
 
 
-      équipe();
+//       équipe();
     
 
 
-// -------------------------------------------------------------
-// 5. CRÉER UNE CRÉATURE
-// Validez chaque champ du formulaire avec une expression régulière
-// (voir le tableau du brief). Affichez le message d'erreur sous le
-// champ, et n'ajoutez jamais une créature invalide.
-// -------------------------------------------------------------
+// // -------------------------------------------------------------
+// // 5. CRÉER UNE CRÉATURE
+// // Validez chaque champ du formulaire avec une expression régulière
+// // (voir le tableau du brief). Affichez le message d'erreur sous le
+// // champ, et n'ajoutez jamais une créature invalide.
+// // -------------------------------------------------------------
 
 
-function nouvellecréature(){
-               //la validation 
-const form = document.getElementById("creature-form");
+// function nouvellecréature(){
+//                //la validation 
+// const form = document.getElementById("creature-form");
 
-              // validation de id
-const inputId = form.querySelector('[name="id"]');
-const messageErreurId= inputId.parentElement.querySelector(".error-message");
+//               // validation de id
+// const inputId = form.querySelector('[name="id"]');
+// const messageErreurId= inputId.parentElement.querySelector(".error-message");
 
- const regexId= /^#\d{3}$/;
+//  const regexId= /^#\d{3}$/;
 
-inputId.addEventListener("input",function(){
+// inputId.addEventListener("input",function(){
    
 
-    const valeur= inputId.value.trim();
+//     const valeur= inputId.value.trim();
 
-    inputId.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
-    messageErreurId.classList.remove("text-red-500","text-green-500");
+//     inputId.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
+//     messageErreurId.classList.remove("text-red-500","text-green-500");
 
-    let exist=false;
-    for(let i=0;i<créatures.length;i++){
-    if (valeur===créatures[i].id){
-      exist=true;
-}}
+//     let exist=false;
+//     for(let i=0;i<créatures.length;i++){
+//     if (valeur===créatures[i].id){
+//       exist=true;
+// }}
 
-    if (valeur===""){
-        messageErreurId.textContent="";
-    }
-    else if(!regexId.test(valeur)){
-        inputId.classList.add("border-red-500");
-        inputId.classList.add("text-red-500");
-       messageErreurId.textContent="Format invalide:exemple #001";
-       messageErreurId.classList.add("text-red-500");
+//     if (valeur===""){
+//         messageErreurId.textContent="";
+//     }
+//     else if(!regexId.test(valeur)){
+//         inputId.classList.add("border-red-500");
+//         inputId.classList.add("text-red-500");
+//        messageErreurId.textContent="Format invalide:exemple #001";
+//        messageErreurId.classList.add("text-red-500");
         
 
-    }
+//     }
 
-    else if(exist===true){
-     inputId.classList.add("border-red-500");
-     messageErreurId.textContent="cette id est déjà identifié.";
-    messageErreurId.classList.add("text-red-500"); 
-    }
+//     else if(exist===true){
+//      inputId.classList.add("border-red-500");
+//      messageErreurId.textContent="cette id est déjà identifié.";
+//     messageErreurId.classList.add("text-red-500"); 
+//     }
 
-    else{
-        inputId.classList.add("border-green-500");
-        inputId.classList.add("text-green-500");
-        messageErreurId.textContent="Nomber valid";
-       messageErreurId.classList.add("text-green-500");
+//     else{
+//         inputId.classList.add("border-green-500");
+//         inputId.classList.add("text-green-500");
+//         messageErreurId.textContent="Nomber valid";
+//        messageErreurId.classList.add("text-green-500");
        
-    }
-});
+//     }
+// });
 
-           // validation de nom
+//            // validation de nom
 
-const inputNom=form.querySelector('[name="name"]');
-const messageErreurNom= inputNom.parentElement.querySelector(".error-message")
-const regexNom=/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
+// const inputNom=form.querySelector('[name="name"]');
+// const messageErreurNom= inputNom.parentElement.querySelector(".error-message")
+// const regexNom=/^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .'-]{1,29}$/;
 
- inputNom.addEventListener("input",function(){
-    const mot=inputNom.value.toLowerCase();
+//  inputNom.addEventListener("input",function(){
+//     const mot=inputNom.value.toLowerCase();
 
-     inputNom.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
-   messageErreurNom.classList.remove("text-red-500","text-green-500");
+//      inputNom.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
+//    messageErreurNom.classList.remove("text-red-500","text-green-500");
 
-    if(mot===""){
-        messageErreurNom.textContent="";
-    }
-    else if (!regexNom.test(mot)){
-        inputNom.classList.add("text-red-500");
-        inputNom.classList.add("border-red-500");
-        messageErreurNom.textContent="Nom invalide:exemple Pikachu,Pika-chu";
-        messageErreurNom.classList.add("text-red-500");
+//     if(mot===""){
+//         messageErreurNom.textContent="";
+//     }
+//     else if (!regexNom.test(mot)){
+//         inputNom.classList.add("text-red-500");
+//         inputNom.classList.add("border-red-500");
+//         messageErreurNom.textContent="Nom invalide:exemple Pikachu,Pika-chu";
+//         messageErreurNom.classList.add("text-red-500");
         
-    }
+//     }
 
-    else{
-        inputNom.classList.add("text-green-500");
-        inputNom.classList.add("border-green-500");
-        messageErreurNom.textContent="Nom valide";
-        messageErreurNom.classList.add("text-green-500");}
+//     else{
+//         inputNom.classList.add("text-green-500");
+//         inputNom.classList.add("border-green-500");
+//         messageErreurNom.textContent="Nom valide";
+//         messageErreurNom.classList.add("text-green-500");}
     
- });
+//  });
 
 
- const inputNiveau=form.querySelector('[name="level"]');
- const messageErreurNiveau=inputNiveau.parentElement.querySelector(".error-message");
-    const regexNiveau=/^(Base|Niveau([1-9]|[1-9]\d|100))$/i;
-
-  
-  inputNiveau.addEventListener("input",function(){
-     const niveau=inputNiveau.value.trim();
-
-     inputNiveau.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
-   messageErreurNiveau.classList.remove("text-red-500","text-green-500");
-
-     if(niveau ===""){
-       messageErreurNiveau.textContent="";}
-
-    else if(!regexNiveau.test(niveau)){
-        inputNiveau.classList.add("border-red-500");
-        inputNiveau.classList.add("text-red-500");
-        messageErreurNiveau.textContent="invalid Niveau. exemple:Niveau1";
-       messageErreurNiveau.classList.add("text-red-500");
-    }
-
-     else{
-        inputNiveau.classList.add("border-green-500");
-        inputNiveau.classList.add("text-green-500");
-        messageErreurNiveau.textContent="valid Niveau.";
-       messageErreurNiveau.classList.add("text-green-500");
-    }
- });
-
-          // validation de statistique
-
- const inputStatic=form.querySelectorAll('[name="stat1"],[name="stat2"],[name="stat3"]');
- inputStatic.forEach(function(input){
-  const messageErreurStatic= input.parentElement.querySelector(".error-message");
-  const regexStatic=/^\d{1,3}$/;
+//  const inputNiveau=form.querySelector('[name="level"]');
+//  const messageErreurNiveau=inputNiveau.parentElement.querySelector(".error-message");
+//     const regexNiveau=/^(Base|Niveau([1-9]|[1-9]\d|100))$/i;
 
   
-  input.addEventListener("input",function(){
-     const static=input.value;
+//   inputNiveau.addEventListener("input",function(){
+//      const niveau=inputNiveau.value.trim();
 
-     input.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
-   messageErreurStatic.classList.remove("text-red-500","text-green-500");
+//      inputNiveau.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
+//    messageErreurNiveau.classList.remove("text-red-500","text-green-500");
 
-     if(static ===""){
-       messageErreurStatic.textContent="";}
+//      if(niveau ===""){
+//        messageErreurNiveau.textContent="";}
 
-    else if(!regexStatic.test(static)){
-        input.classList.add("border-red-500");
-        input.classList.add("text-red-500");
-        messageErreurStatic.textContent="invalid . exemple:1";
-       messageErreurStatic.classList.add("text-red-500");
-    }
+//     else if(!regexNiveau.test(niveau)){
+//         inputNiveau.classList.add("border-red-500");
+//         inputNiveau.classList.add("text-red-500");
+//         messageErreurNiveau.textContent="invalid Niveau. exemple:Niveau1";
+//        messageErreurNiveau.classList.add("text-red-500");
+//     }
 
-     else{
-        input.classList.add("border-green-500");
-        input.classList.add("text-green-500");
-       messageErreurStatic.textContent="valid .";
-       messageErreurStatic.classList.add("text-green-500");
-    }});
- });
+//      else{
+//         inputNiveau.classList.add("border-green-500");
+//         inputNiveau.classList.add("text-green-500");
+//         messageErreurNiveau.textContent="valid Niveau.";
+//        messageErreurNiveau.classList.add("text-green-500");
+//     }
+//  });
 
-//  validation de l image
+//           // validation de statistique
 
-const inputImg=form.querySelector('[name="image"]');
-const messageErreurImg=inputImg.parentElement.querySelector(".error-message");
-const regexImg=/^https?:\/\/\S+\.(png|jpe?g|webp|gif)$/i;
+//  const inputStatic=form.querySelectorAll('[name="stat1"],[name="stat2"],[name="stat3"]');
+//  inputStatic.forEach(function(input){
+//   const messageErreurStatic= input.parentElement.querySelector(".error-message");
+//   const regexStatic=/^\d{1,3}$/;
 
-inputImg.addEventListener("input",function(){
-    const img=inputImg.value.trim();
+  
+//   input.addEventListener("input",function(){
+//      const static=input.value;
+
+//      input.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
+//    messageErreurStatic.classList.remove("text-red-500","text-green-500");
+
+//      if(static ===""){
+//        messageErreurStatic.textContent="";}
+
+//     else if(!regexStatic.test(static)){
+//         input.classList.add("border-red-500");
+//         input.classList.add("text-red-500");
+//         messageErreurStatic.textContent="invalid . exemple:1";
+//        messageErreurStatic.classList.add("text-red-500");
+//     }
+
+//      else{
+//         input.classList.add("border-green-500");
+//         input.classList.add("text-green-500");
+//        messageErreurStatic.textContent="valid .";
+//        messageErreurStatic.classList.add("text-green-500");
+//     }});
+//  });
+
+// //  validation de l image
+
+// const inputImg=form.querySelector('[name="image"]');
+// const messageErreurImg=inputImg.parentElement.querySelector(".error-message");
+// const regexImg=/^https?:\/\/\S+\.(png|jpe?g|webp|gif)$/i;
+
+// inputImg.addEventListener("input",function(){
+//     const img=inputImg.value.trim();
    
 
- inputImg.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
-   messageErreurImg.classList.remove("text-red-500","text-green-500");
+//  inputImg.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
+//    messageErreurImg.classList.remove("text-red-500","text-green-500");
 
-     if(img ===""){
-       messageErreurImg.textContent="";}
+//      if(img ===""){
+//        messageErreurImg.textContent="";}
 
-    else if(!regexImg.test(img)){
-       inputImg.classList.add("border-red-500");
-        inputImg.classList.add("text-red-500");
-        messageErreurImg.textContent="invalid image. exemple:https://site.com/image.png";
-        messageErreurImg.classList.add("text-red-500");
-    }
+//     else if(!regexImg.test(img)){
+//        inputImg.classList.add("border-red-500");
+//         inputImg.classList.add("text-red-500");
+//         messageErreurImg.textContent="invalid image. exemple:https://site.com/image.png";
+//         messageErreurImg.classList.add("text-red-500");
+//     }
 
-     else{
-        inputImg.classList.add("border-green-500");
-        inputImg.classList.add("text-green-500");
-        messageErreurImg.textContent="valid image.";
-        messageErreurImg.classList.add("text-green-500");
-    }
- });
+//      else{
+//         inputImg.classList.add("border-green-500");
+//         inputImg.classList.add("text-green-500");
+//         messageErreurImg.textContent="valid image.";
+//         messageErreurImg.classList.add("text-green-500");
+//     }
+//  });
 
- const inputMessage =form.querySelector('[name="description"]');
- const messageErreurMessage=inputMessage.parentElement.querySelector(".error-message");
- const regexMessage=/^[\s\S]{10,200}$/;
+//  const inputMessage =form.querySelector('[name="description"]');
+//  const messageErreurMessage=inputMessage.parentElement.querySelector(".error-message");
+//  const regexMessage=/^[\s\S]{10,200}$/;
 
- inputMessage.addEventListener("input",function(){
-   const message=inputMessage.value.trim();
-inputMessage.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
-   messageErreurMessage.classList.remove("text-red-500","text-green-500");
+//  inputMessage.addEventListener("input",function(){
+//    const message=inputMessage.value.trim();
+// inputMessage.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");
+//    messageErreurMessage.classList.remove("text-red-500","text-green-500");
 
-   if(message===""){
-      messageErreurMessage.textContent="";
-   }
+//    if(message===""){
+//       messageErreurMessage.textContent="";
+//    }
 
-   else if(!regexMessage.test(message)){
-      inputMessage.classList.add("text-red-500");
-      inputMessage.classList.add("border-red-500");
-      messageErreurMessage.textContent="message invalid";
-      messageErreurMessage.classList.add("text-red-500");
-   }
+//    else if(!regexMessage.test(message)){
+//       inputMessage.classList.add("text-red-500");
+//       inputMessage.classList.add("border-red-500");
+//       messageErreurMessage.textContent="message invalid";
+//       messageErreurMessage.classList.add("text-red-500");
+//    }
 
-    else {
-      inputMessage.classList.add("text-green-500");
-      inputMessage.classList.add("border-green-500");
-      messageErreurMessage.textContent="message valid";
-      messageErreurMessage.classList.add("text-green-500");
-   }
- });
+//     else {
+//       inputMessage.classList.add("text-green-500");
+//       inputMessage.classList.add("border-green-500");
+//       messageErreurMessage.textContent="message valid";
+//       messageErreurMessage.classList.add("text-green-500");
+//    }
+//  });
 
- const inputtype=form.querySelector('[name="type"]');
- const messageErreurtype=inputtype.parentElement.querySelector(".error-message");
+//  const inputtype=form.querySelector('[name="type"]');
+//  const messageErreurtype=inputtype.parentElement.querySelector(".error-message");
  
 
- form.addEventListener('submit',(e)=>{
-   e.preventDefault();
-    const nouvellecarte={ id:inputId.value,
-                     name: inputNom.value,
-                     type:inputtype.value,
-                     level:inputNiveau.value,
-                     stats:{hp:Number(form.querySelector('[name="stat1"]').value)
-                        ,attack: Number(form.querySelector('[name="stat2"]').value)
-                        ,defence:Number(form.querySelector('[name="stat3"]').value )
-                     },
-                     image:inputImg.value,
-                     description:inputMessage.value}
+//  form.addEventListener('submit',(e)=>{
+//    e.preventDefault();
+//     const nouvellecarte={ id:inputId.value,
+//                      name: inputNom.value,
+//                      type:inputtype.value,
+//                      level:inputNiveau.value,
+//                      stats:{hp:Number(form.querySelector('[name="stat1"]').value)
+//                         ,attack: Number(form.querySelector('[name="stat2"]').value)
+//                         ,defence:Number(form.querySelector('[name="stat3"]').value )
+//                      },
+//                      image:inputImg.value,
+//                      description:inputMessage.value}
     
-     créatures.push(nouvellecarte);
-  affichercartes(créatures) 
+//      créatures.push(nouvellecarte);
+//   affichercartes(créatures) 
 
-});
+// });
 
   
-  form.addEventListener("reset",(e)=>{
-   const inputdelete=form.querySelectorAll("input");
-   const messagedelete=form.querySelectorAll(".error-message");
-   inputdelete.forEach(input=>{
-   input.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");});
+//   form.addEventListener("reset",(e)=>{
+//    const inputdelete=form.querySelectorAll("input");
+//    const messagedelete=form.querySelectorAll(".error-message");
+//    inputdelete.forEach(input=>{
+//    input.classList.remove("border-red-500","border-green-500" ,"text-red-500", "text-green-500");});
  
 
-   messagedelete.forEach(message=>{
-   message.classList.remove("text-red-500", "text-green-500");
-    message.textContent="";});
+//    messagedelete.forEach(message=>{
+//    message.classList.remove("text-red-500", "text-green-500");
+//     message.textContent="";});
 
    
   
-  });
+//   });
 
-}nouvellecréature();
+// }nouvellecréature();
