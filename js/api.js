@@ -29,7 +29,6 @@ export async function getcreature(catégorie, text ,tri ,order){
         if(!response.ok){
         throw new Error(`HTTP.error:{response status}`);}
          const data=await response.json();
-
          console.log("donné",data);
         return data;
     }
@@ -50,6 +49,36 @@ export async function addcreature(nouvellecréature){
     if(!responce.ok){
       throw new Error(`Erreur lors de l'ajouter`)
     }
+// -----------------------------filtre-----------------------
+// export async function typeliste(catégorie){
+//   try{
+//     const response= await fetch(`http://localhost:3000/creatures?type=${catégorie}`);
+    
+//     if(!response.ok){
+//         throw new Error(`HTTP.error={response status} `)
+//     }
+
+//     const data=await response.json();
+//       return data  }
+//   catch(error){console.error(error.message);}
+
+// }
+
+
+// ---------------------------------recherche----------------------
+// export async function recherchecreature(catégorie,text){
+//   try{
+//      const responce=await fetch(`http://localhost:3000/creatures?type=${catégorie}&q=${text}`)
+//      if(catégorie!=="tous"){
+//     if(!responce.ok){
+//         throw new Error(`HTTP.error={response status}`)
+//     }
+//       const data=await responce.json();
+//       return data;
+//   }}
+//   catch(error){console.error(error.message)};
+
+// }
 
     const data=await responce.json();
     return data;
@@ -59,6 +88,8 @@ export async function addcreature(nouvellecréature){
     console.error(error);
   }
 }
+
+
 
 
 

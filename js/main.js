@@ -9,6 +9,12 @@ let recherchecreature=" ";
   let order="asc";
 
 
+
+
+let typecreature="Tous";
+let recherchecreature=" ";
+
+
 async function show(){
     affichermessage();
     try{
